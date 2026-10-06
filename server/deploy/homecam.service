@@ -1,0 +1,23 @@
+# /etc/systemd/system/homecam.service
+[Unit]
+Description=HomeCam relay (camera.example.com)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=homecam
+Group=homecam
+WorkingDirectory=/opt/homecam/server
+ExecStart=/opt/homecam/venv/bin/python app.py
+Restart=always
+RestartSec=3
+
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/opt/homecam/server
+
+[Install]
+WantedBy=multi-user.target

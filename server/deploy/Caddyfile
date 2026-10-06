@@ -1,0 +1,9 @@
+# /etc/caddy/Caddyfile
+# Caddy gets and renews the Let's Encrypt certificate automatically.
+# Requires a DNS A record: camera.example.com -> <VPS public IP>
+camera.example.com {
+	reverse_proxy 127.0.0.1:8000 {
+		# Send MJPEG frames immediately instead of buffering them.
+		flush_interval -1
+	}
+}

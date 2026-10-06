@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<header class="bar">
+  <div class="brand"><span class="dot live" id="dot"></span> HomeCam <span class="muted" id="state">connecting…</span></div>
+  <nav>
+    <span class="muted">{{ user }}</span>
+    <form method="post" action="{{ url_for('logout') }}">
+      <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+      <button class="ghost" type="submit">Sign out</button>
+    </form>
+  </nav>
+</header>
+
+<main class="viewer">
+  <div class="frame" id="frame">
+    <img id="video" alt="Live camera stream" src="{{ url_for('stream') }}">
+    <div class="overlay" id="overlay" hidden>Camera unavailable — retrying…</div>
+    <div class="clock" id="clock"></div>
+  </div>
+  <div class="controls">
+    <button id="pause" type="button">Pause</button>
+    <a class="button" href="{{ url_for('snapshot') }}">Snapshot</a>
+    <button id="fullscreen" type="button">Fullscreen</button>
+  </div>
+</main>
+
+<script src="{{ url_for('static', filename='viewer.js') }}"></script>
+{% endblock %}

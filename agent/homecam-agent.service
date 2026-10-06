@@ -1,0 +1,17 @@
+# For a Linux / Raspberry Pi camera machine: /etc/systemd/system/homecam-agent.service
+# Put the token in /opt/homecam/agent/token.txt (chmod 600).
+[Unit]
+Description=HomeCam agent -> camera.example.com
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=homecam
+SupplementaryGroups=video
+WorkingDirectory=/opt/homecam/agent
+ExecStart=/opt/homecam/venv/bin/python camera_agent.py --server wss://camera.example.com/agent
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

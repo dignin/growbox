@@ -1,0 +1,9 @@
+
+agent/token.txt
+agent/rtsp-url.txt
+**/__pycache__/
+
+agent/camera-settings.json
+agent/camera-settings.tmp
+agent/.venv/
+server/config.json
